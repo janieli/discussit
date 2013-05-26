@@ -1,0 +1,9 @@
+<div class="span7 well">
+
+	<h4><%=link_to post.title, post.url, :target => :blank %><% if current_user == post.user %>
+	<%= link_to 'edit', edit_post_path(post), {:class => 'btn btn-primary'}%>
+	<% end %>
+	</h4>
+	<p><%= post.description%></p>
+	<p><span>Posted by: </span><%= post.user.username%></p>
+</div>
