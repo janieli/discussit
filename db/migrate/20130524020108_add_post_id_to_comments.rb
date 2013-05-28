@@ -1,4 +1,4 @@
-..class AddPostIdToComments < ActiveRecord::Migration
+class AddPostIdToComments < ActiveRecord::Migration
   def change
   	add_column :comments, :post_id, :integer
   end
