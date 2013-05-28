@@ -1,4 +1,32 @@
 <!-- Comments Form -->
+<h3>Comments:</h3>
+
+<% if @comment.errors.any? %>
+	<div class='alert alert-error'><%= @comment.errors.full_messages.join(', ') %></div>
+<% end %>
+
+
+<% @post.reload.comments.each do |comment| %>
+<div class='row'>
+	<div class='span1 text-center well'>
+			<%= link_to "upvote", vote_post_comment_path(comment, vote: true), method: 'post' %>
+		</br>
+		<%= "Total: " + comment.total_votes.to_s %>
+		<br/>
+			<%= link_to "downvote", vote_post_comment_path(comment, vote: false), method: 'post' %>
+	</div>
+
+
+	<div class='span7 well'>
+		<li><%= comment.body %></li>
+	
+	<% if current_user == comment.user %><%= link_to 'edit', edit_post_comment_path(comment), {:class => 'btn btn-primary'}%>
+	<% end %>
+	<br/>
+	<p><span>Comment added by: </span><%= comment.user.username %></p>
+	</div>
+</div>
+<% end %>
 
 <% if @comment.errors.any? %>
 	<div class='alert alert-error'><%= @comment.errors.full_messages.join(', ') %></div>
@@ -6,9 +34,10 @@
 
 <div class="span7 well">
 <%= form_for([@post, @comment]) do |f| %>
-	<%= f.label :body, "Comment on this post" %>
+	<%= f.label :body, "Add a comment" %>
 	<%= f.text_area :body %>
 	<br/>
 	<%= f.submit %>
 <% end %>
 </div>
+

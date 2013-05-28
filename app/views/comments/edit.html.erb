@@ -1,0 +1,13 @@
+<!-- Posts Form -->
+
+<% if @comment.errors.any? %>
+	<div class='alert alert-error'><%= @comment.errors.full_messages.join(', ') %></div>
+<% end %>
+
+<%= form_for @comment do |f| %>
+	<%= f.label :body %>
+	<%= f.text_area :body %>
+	</br>
+	<%= f.submit %>
+
+<% end %>

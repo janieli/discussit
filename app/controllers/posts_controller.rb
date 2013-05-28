@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  before_filter :require_user, only: [:new, :create, :edit, :update]
+  before_filter :require_user, only: [:new, :create, :edit, :update, :vote]
 
   def index
   	@posts = Post.all
@@ -8,7 +8,7 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find(params[:id])
-    #@comment = @post.comments.build   #creating a new in-memory comment, does not hit db
+    @comment = @post.comments.build   #creating a new in-memory comment, does not hit db
 	end
 
 # new post form
@@ -41,6 +41,14 @@ class PostsController < ApplicationController
   	else #validation failure
       render :edit
   	end
+  end
+
+  def vote
+    post=Post.find(params[:id])
+    Vote.create(voteable: post, user: current_user, vote: params[:vote])
+
+    flash[:notice] = "Your vote was counted."
+    redirect_to posts_path
   end
 
 end

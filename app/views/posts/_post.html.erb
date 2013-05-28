@@ -1,9 +1,21 @@
-<div class="span7 well">
+<div class='row'>
+	<div class='span1 text-center well'>
+			<%= link_to "upvote", vote_post_path(post, vote: true), method: 'post' %>
+		</br>
+		<%= "Total: " + post.total_votes.to_s %>
+		<br/>
+			<%= link_to "downvote", vote_post_path(post, vote: false), method: 'post' %>
+	</div>
 
-	<h4><%=link_to post.title, post.url, :target => :blank %><% if current_user == post.user %>
-	<%= link_to 'edit', edit_post_path(post), {:class => 'btn btn-primary'}%>
+<div class='span7 well'>
+
+	<h4><%=link_to post.title, post.url, :target => :blank %></h4>
+	<% if current_user == post.user %>
+	<h6><%= link_to 'edit', edit_post_path(post), {:class => 'btn btn-primary'}%>
 	<% end %>
-	</h4>
+	<%= link_to 'post details', post_path(post), {:class => 'btn btn-primary'}%>
+	</h6>
 	<p><%= post.description%></p>
 	<p><span>Posted by: </span><%= post.user.username%></p>
+</div>
 </div>

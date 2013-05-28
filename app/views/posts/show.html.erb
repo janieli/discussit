@@ -3,3 +3,6 @@
 
 <%= render @post %>
 
+<% if logged_in? %>
+<%= render '/comments/form' %>
+<% end %>

@@ -1,3 +1,5 @@
 <h3>Editing <%= @post.title %></h3>
 
+<% if logged_in? %>
 <%= render 'form' %>
+<% end %>
