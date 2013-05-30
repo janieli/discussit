@@ -37,7 +37,7 @@ class CommentsController < ApplicationController
   def vote
     @post = Post.find(params[:post_id])
     @comment = Comment.find(params[:id])
-    Vote.create(voteable: comment, user: current_user, vote: params[:vote])
+    Vote.create(voteable: @comment, user: current_user, vote: params[:vote])
 
     flash[:notice] = "Your vote was counted."
     redirect_to posts_path(@post)
